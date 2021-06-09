@@ -1,0 +1,23 @@
+{
+  "name": "socra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remydao/socra.git"
+  },
+  "author": "blokoding",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remydao/socra/issues"
+  },
+  "homepage": "https://github.com/remydao/socra#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.9"
+  }
+}
