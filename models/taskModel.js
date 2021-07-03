@@ -12,6 +12,4 @@ var taskSchema = new Schema({
     mission: String,
 });
 
-module.exports = {
-    taskSchema: taskSchema
-};
+module.exports = mongoose.model("taskModel", taskSchema);
