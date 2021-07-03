@@ -20,6 +20,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongodb": "^3.6.9",
-    "mongoose": "^5.13.0"
+    "mongoose": "^5.13.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   }
 }
