@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && node app.js",
-    "test": "mocha --timeout 10000"
+    "start": "node app.js",
+    "test": "mocha --timeout 10000",
+    "init": "node script/initialize-db.js"
   },
   "repository": {
     "type": "git",

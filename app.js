@@ -1,3 +1,6 @@
+// Set env variable for dev purpose
+process.env.NODE_ENV = 'dev';
+
 const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
