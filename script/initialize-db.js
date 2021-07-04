@@ -1,12 +1,13 @@
 // Set env variable for dev purpose
 process.env.NODE_ENV = 'dev';
 
+// modules
 const mongoose = require('mongoose');
 const TaskModel = require("../models/taskModel");
-
+var data = require("../const/db-data");
 let config = require('config'); // We load the db location from the JSON files
-mongoose.connect(config.DBHost, { useUnifiedTopology: true,  useNewUrlParser: true });
 
+mongoose.connect(config.DBHost, { useUnifiedTopology: true,  useNewUrlParser: true });
 var db = mongoose.connection;
  
 db.on('error', console.error.bind(console, 'connection error to socra DB'));
@@ -18,14 +19,15 @@ db.once('open', function() {
     var tasksArray = [];
     for (var i = 0; i < 10; i++) {
         const task = new TaskModel({
-            location: "Paris 3",
-            duration: 1,
-            price: 120,
-            remote: 0,
-            start: "ASAP",
-            job: "Installation",
-            context: "Installation",
-            mission: "Installation",
+            location: data.location[i],
+            duration: data.duration[i],
+            price: data.price[i],
+            remote: data.remote[i],
+            start: data.start[i],
+            job: data.job[i],
+            context: data.context[i],
+            mission: data.mission[i],
+            timestamp: Date.now(),
         });
         tasksArray.push(task);
     }
