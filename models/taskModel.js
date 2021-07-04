@@ -10,6 +10,7 @@ var taskSchema = new Schema({
     job: String,
     context: String,
     mission: String,
+    timestamp: Number,
 });
 
 module.exports = mongoose.model("taskModel", taskSchema);

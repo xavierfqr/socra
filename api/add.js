@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const TaskModel = require("../models/taskModel");
 
-router.get('/tasks', async function(req, res) {
-    const tasks = await TaskModel.find();
-	res.send(tasks);
-});
-
 // Add a task to the database
 router.post('/task', async function(req, res) {
     const task = new TaskModel({
@@ -18,6 +13,7 @@ router.post('/task', async function(req, res) {
         job: req.body.job,
         context: req.body.context,
         mission: req.body.mission,
+        timestamp: Date.now(),
     })
     await task.save();
     res.send(task);
