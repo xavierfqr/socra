@@ -11,28 +11,14 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('Tasks', () => {
+
+describe('Post Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
         TaskModel.remove({}, (err) => {
-           done();
+            done();
         });
     });
-
-    // Test: GET all the tasks
-    describe('/GET tasks', () => {
-        it('Should GET all the tasks', (done) => {
-            chai.request(server)
-                .get('/tasks')
-                .end((err, res) => {
-                    res.should.have.status(200); // Status code
-                    res.body.should.be.a('array'); // []
-                    res.body.length.should.be.eql(0); // no task
-                done();
-            });
-        });
-    });
-
-    describe('/POST task', () => {
+    describe('Post one task', () => {
         it('Should POST a task', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",
@@ -56,6 +42,7 @@ describe('Tasks', () => {
                     res.body.should.have.property('job');
                     res.body.should.have.property('context');
                     res.body.should.have.property('mission');
+                    res.body.should.have.property('timestamp');
                 done();
             });
         });
