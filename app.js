@@ -16,6 +16,7 @@ mongoose.connect(config.DBHost, { useUnifiedTopology: true,  useNewUrlParser: tr
 app.use(express.json());
 app.use(require('./api/add'));
 app.use(require('./api/get'));
+app.use(require('./api/get-by-id'));
 
 app.listen(3000, function () {
     console.log('App is listening on port 3000');
