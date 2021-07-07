@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const TaskModel = require("../models/task-model");
+const mongoose = require('mongoose');
 
 router.patch('/tasks/modify/:id', async function(req, res) {
+
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+    }
 
     const id = req.params.id;
     var postData = req.body;
@@ -15,9 +20,9 @@ router.patch('/tasks/modify/:id', async function(req, res) {
     // our query results in an updated version of the entity.
 
     if (post) {
-        res.send(post);
+        return res.send(post);
     } else {
-        next(new PostNotFoundException(id));
+        return res.status(400).send({error: "Bad request"});
     }
 });
 
