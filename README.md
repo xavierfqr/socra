@@ -35,6 +35,7 @@ npm run test
 |- models       # Mongoose models
 |- node_modules # npm modules
 |- script       # init scripts
-|- service      # Services layer
+|- services     # Services layer
+|- controllers  # Controllers layer
 +- test         # test
 ```
