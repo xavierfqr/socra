@@ -18,7 +18,8 @@ app.use(require('./api/add'));
 app.use(require('./api/get'));
 app.use(require('./api/get-by-id'));
 app.use(require('./api/pdf'));
-
+app.use(require('./api/search'));
+app.use(require('./api/modify'));
 
 app.listen(3000, function () {
     console.log('App is listening on port 3000');
