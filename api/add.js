@@ -23,7 +23,7 @@ router.post('/task', async function(req, res) {
         if (error.name === 'ValidationError') {
             return error = handleValidationError(error, res);
         } else {
-            res.status(500).send({error: "An unknown error has occured."})
+            return res.status(500).send({error: "An unknown error has occured."})
         }
     }
 });
