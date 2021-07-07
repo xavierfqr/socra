@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  nodejs:
+  build:
     docker:
       - image: 'circleci/node:latest'
       - image: 'circleci/mongo:latest'
