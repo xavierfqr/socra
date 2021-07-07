@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 
 // Require the dependencies
 let mongoose = require("mongoose");
-let TaskModel = require("../models/taskModel");
+let TaskModel = require("../models/task-model");
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../app.js');
