@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const TaskModel = require("../models/task-model");
+const {getTasks} = require('../controllers/task-controller');
 
-router.get('/tasks', async function(req, res) {
-    const tasks = await TaskModel.find().sort({ timestamp: "desc" });
-	return res.send(tasks);
-});
+//Get all tasks
+router.get('/tasks', getTasks);
+
 
 module.exports = router;

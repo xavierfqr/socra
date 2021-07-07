@@ -1,19 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const TaskModel = require("../models/task-model");
-const orderTasksByKeywords = require("../services/search-service");
+const {searchTasks} = require('../controllers/task-controller');
 
-router.get("/tasks/search/keywords", async function(req, res) {
-    if (req.query.search) {
-        const keywordList = req.query.search.split(',');
-        const taskList = await TaskModel.find();
+router.get("/tasks/search/keywords", searchTasks)
 
-        const result = orderTasksByKeywords(taskList, keywordList);
-        console.log(result);
-        res.send(result);
-    } else {
-        res.send();
-    }
-})
 
 module.exports = router;
