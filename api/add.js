@@ -1,7 +1,7 @@
 const express = require('express');
 const handleValidationError = require('../utils/handle-errors')
 const router = express.Router();
-const TaskModel = require("../models/taskModel");
+const TaskModel = require("../models/task-model");
 
 // Add a task to the database
 router.post('/task', async function(req, res) {

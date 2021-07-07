@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'dev';
 
 // modules
 const mongoose = require('mongoose');
-const TaskModel = require("../models/taskModel");
+const TaskModel = require("../models/task-model");
 var data = require("../const/db-data");
 let config = require('config'); // We load the db location from the JSON files
 
