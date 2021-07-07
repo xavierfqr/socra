@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+  nodejs:
+    docker:
+      - image: 'circleci/node:latest'
+      - image: 'circleci/mongo:latest'
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Run tests
+          command: yarn test
+            
