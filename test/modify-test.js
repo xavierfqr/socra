@@ -9,12 +9,6 @@ let chaiHttp = require('chai-http');
 let server = require('../app.js');
 let should = chai.should();
 
-// UUID
-const { 
-    v1: uuidv1,
-    v4: uuidv4,
-} = require('uuid');
-
 describe('PATCH Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
         TaskModel.remove({}, (err) => {
