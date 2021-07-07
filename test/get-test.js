@@ -32,6 +32,7 @@ describe('Get Endpoint Tests', () => {
         });
     });
 
+
     // Test: GET one task by id
     describe('/GET task by id', () => {
         it('Should GET one task by Id', done => {
@@ -58,7 +59,7 @@ describe('Get Endpoint Tests', () => {
                         res.body.should.have.property('job');
                         res.body.should.have.property('context');
                         res.body.should.have.property('mission');
-                        res.body.should.have.property('_id').eql(task.id);
+                        res.body.should.have.property('_id').eql(task.id);  //check that the id from the GET request is the same than the one of the task saved previously
                     done();
                 })
             })    
