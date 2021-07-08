@@ -8,14 +8,14 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('GET Endpoint Tests', () => {
+describe('GET PDF Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
         TaskModel.deleteMany({}, (err) => {
             done();
         });
     });
 
-    describe('/GET pdf by id', () => {
+    describe('GET pdf by id', () => {
         
         it('Should GET the pdf by id', done => {
             let task = new TaskModel({
