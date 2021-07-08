@@ -30,6 +30,11 @@ localhost:3000/api-docs
 npm run test
 ```
 
+## Circle CI
+
+Pour voir la CI il suffit de cliquer sur les petites coches vertes à coté des commits.
+
+
 ## Project architecture
 
 ```
