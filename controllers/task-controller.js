@@ -57,7 +57,7 @@ const modifyTaskById = async (req, res) => {
     // Update timestamp
     postData.timestamp = Date.now();
 
-	const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true} );
+	const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true, useFindAndModify: false} );
     // Thanks to passing the new: true option,
     // our query results in an updated version of the entity.
 
