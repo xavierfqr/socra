@@ -7,7 +7,7 @@ var taskSchema = new Schema({
     price: { type: Number, min: 0 },
     remote: { type: Number, min: 0, max: 100 },
     start: String,
-    job: String,
+    job: { type: String, required: true },
     context: String,
     mission: String,
     timestamp: Number,
