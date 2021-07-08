@@ -1,10 +1,10 @@
 // Require the dependencies
-let mongoose = require("mongoose");
-let TaskModel = require("../models/task-model");
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../app.js');
-let should = chai.should();
+const mongoose = require("mongoose");
+const TaskModel = require("../models/task-model");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app.js');
+const should = chai.should();
 
 describe('PATCH Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database

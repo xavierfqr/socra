@@ -1,10 +1,10 @@
 // Require the dependencies
-let mongoose = require("mongoose");
-let TaskModel = require("../models/task-model");
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../app.js');
-let should = chai.should();
+const mongoose = require("mongoose");
+const TaskModel = require("../models/task-model");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app.js');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -44,9 +44,9 @@ describe('SEARCH Endpoint Tests', () => {
                                 res.should.have.status(200); // Status code
                                 res.body.should.be.a('array'); // []
                                 res.body.length.should.be.eql(3);
-                                res.body[0]['location'].should.be.eql(task3.location);
-                                res.body[1]['location'].should.be.eql(task1.location);
-                                res.body[2]['location'].should.be.eql(task2.location);
+                                res.body[0].should.have.property('location').eql(task3.location);
+                                res.body[1].should.have.property('location').eql(task1.location);
+                                res.body[2].should.have.property('location').eql(task2.location);
                                 done();
                             });
                     });
@@ -77,8 +77,8 @@ describe('SEARCH Endpoint Tests', () => {
                             res.should.have.status(200); // Status code
                             res.body.should.be.a('array'); // []
                             res.body.length.should.be.eql(2);
-                            res.body[0]['location'].should.be.eql(task2.location);
-                            res.body[1]['location'].should.be.eql(task1.location);
+                            res.body[0].should.have.property('location').eql(task2.location);
+                            res.body[1].should.have.property('location').eql(task1.location);
                             done();
                         });
                 });
