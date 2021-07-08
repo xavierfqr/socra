@@ -3,14 +3,14 @@ const orderTasksByKeywords = (taskList, keywordList) => {
 
     let taskKeywordOccurencesPairList = [];
 
-    taskList.forEach((task, index) => {
-        taskKeywordOccurencesPairList[index] = [task, getKeywordOccurences(task, keywordList)];
+    taskList.forEach(task => {
+        taskKeywordOccurencesPairList.push([task, getKeywordOccurences(task, keywordList)]);
     });
 
     taskKeywordOccurencesPairList = taskKeywordOccurencesPairList.map(pair => { // apply criteria formula
         const occurenceList = pair[1];
-        const m = occurenceList.filter(keywordOccurence => keywordOccurence[1] > 0).length;
-        const o = occurenceList.reduce((occ1, occ2) => occ1 + occ2, 0);
+        const m = occurenceList.filter(keywordOccurence => keywordOccurence[1] > 0).length; //number of keyword found at least once
+        const o = occurenceList.reduce((occ1, occ2) => occ1 + occ2, 0); //total number of occurences of any keyword found
         return [pair[0], m * o - 0.5 * numberOfKeywords * o]
     });
     
@@ -30,7 +30,7 @@ const getKeywordOccurences = (task, keywordList) => {
     keywordList.forEach(keyword => {
         let occurences = 0;
         for (field in task.toObject())
-            occurences += ((field || "").toString().match(new RegExp(keyword, "g")) || []).length;
+            occurences += ((field || "").toString().match(new RegExp(keyword, "g")) || []).length; //number of occurences of a keyword in a field of a task
         keywordOccurences.push(occurences);
     });
 
