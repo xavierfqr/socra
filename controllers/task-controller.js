@@ -60,7 +60,7 @@ const modifyTaskById = async (req, res) => {
 
     try {
         // {new: true}: query results is in an updated version of the entity.
-        const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true, useFindAndModify: false} );
+        const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true, runValidators: true, useFindAndModify: false} );
         if (post) {
             return res.send(post);
         } else {
