@@ -32,7 +32,7 @@ npm run test
 
 ## Circle CI
 
-Pour voir la CI il suffit de cliquer sur les petites coches vertes à coté des commits.
+To show the CI, click on the green/red mark next to commit names.
 
 
 ## Project architecture
