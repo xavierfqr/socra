@@ -14,7 +14,7 @@ chai.use(chaiHttp);
 
 describe('Post Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
-        TaskModel.remove({}, (err) => {
+        TaskModel.deleteMany({}, (err) => {
             done();
         });
     });
