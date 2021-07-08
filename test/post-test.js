@@ -32,14 +32,13 @@ describe('POST Endpoint Tests', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('location');
-                    res.body.should.have.property('duration');
-                    res.body.should.have.property('remote');
-                    res.body.should.have.property('start');
-                    res.body.should.have.property('job');
-                    res.body.should.have.property('context');
-                    res.body.should.have.property('mission');
-                    res.body.should.have.property('timestamp');
+                    res.body.should.have.property('location').eql(task.location);
+                    res.body.should.have.property('duration').eql(task.duration);
+                    res.body.should.have.property('remote').eql(task.remote);
+                    res.body.should.have.property('start').eql(task.start);
+                    res.body.should.have.property('job').eql(task.job);
+                    res.body.should.have.property('context').eql(task.context);
+                    res.body.should.have.property('mission').eql(task.mission);
                 done();
             });
         });

@@ -137,11 +137,10 @@ describe('GET Endpoint Tests', () => {
             task.save((err, task) => {
                     chai.request(server)
                 .get('/tasks/' + task.id)
-                .send(task)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('location').eql(task.location);
+                        res.body.should.have.property('location').eql(task.location);
                     res.body.should.have.property('duration').eql(task.duration);
                     res.body.should.have.property('remote').eql(task.remote);
                     res.body.should.have.property('start').eql(task.start);
