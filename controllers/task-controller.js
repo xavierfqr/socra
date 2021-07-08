@@ -32,14 +32,14 @@ const addTask = async (req, res) => {
 
 const getTaskById = async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
-        res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+        return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
     }
 
     const task = await TaskModel.findById(req.params.id);
     if (task)
 	    return res.send(task);
     else
-        return next(new NotFoundException());
+        return res.status(404).send({error: "Ressource not found. Id: " + req.params.id + ' does not exist'});
 }
 
 const getTasks = async (req, res) => {
@@ -50,23 +50,31 @@ const getTasks = async (req, res) => {
 const modifyTaskById = async (req, res) => {
 
     if (!mongoose.isValidObjectId(req.params.id)) {
-        res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+        return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
     }
 
     const id = req.params.id;
     var postData = req.body;
-
     // Update timestamp
     postData.timestamp = Date.now();
 
-	const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true, useFindAndModify: false} );
-    // Thanks to passing the new: true option,
-    // our query results in an updated version of the entity.
-
-    if (post) {
-        return res.send(post);
-    } else {
-        return res.status(400).send({error: "Bad request"});
+    try {
+        // {new: true}: query results is in an updated version of the entity.
+        const post = await TaskModel.findByIdAndUpdate(id, postData, {new: true, useFindAndModify: false} );
+        if (post) {
+            return res.send(post);
+        } else {
+            return res.status(404).send({error: "Ressource not found. Id: " + req.params.id + ' does not exist'});
+        }
+    } catch (error) {
+        console.log(error.name);
+        if (error.name === 'ValidationError') {
+            return error = handleValidationError(error, res);
+        } else if (error.name === 'CastError') {
+            return res.status(400).send({error: "Cast error, please check the type of your body request"});
+        } else {
+            return res.status(500).send({error: "An unknown error has occured."})
+        }
     }
 }
 
