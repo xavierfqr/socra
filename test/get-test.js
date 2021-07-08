@@ -30,7 +30,7 @@ describe('GET Endpoint Tests', () => {
     });
 
     // Test: GET one task
-    describe('GET one task', () => {
+    describe('GET tasks', () => {
         it('Should GET one task', (done) => {
             const task = new TaskModel({
                 location: "Issy-les-Moulineaux",
@@ -47,8 +47,8 @@ describe('GET Endpoint Tests', () => {
                     .get('/tasks')
                     .end((err, res) => {
                         res.should.have.status(200); // Status code
-                        res.body.should.be.a('array'); // []
-                        res.body.length.should.be.eql(1); // no task
+                        res.body.should.be.a('array'); 
+                        res.body.length.should.be.eql(1); 
                         res.body[0].should.have.property('location').eql(task.location);
                         res.body[0].should.have.property('duration').eql(task.duration);
                         res.body[0].should.have.property('remote').eql(task.remote);
@@ -59,6 +59,62 @@ describe('GET Endpoint Tests', () => {
                         res.body[0].should.have.property('timestamp').eql(task.timestamp);
                         res.body[0].should.have.property('_id').eql(task.id);
                     done();
+                });
+            });
+        });
+
+        it('Should GET two task', (done) => {
+            const task1 = new TaskModel({
+                location: "Issy-les-Moulineaux",
+                duration: 12,
+                remote: 100,
+                start: "ASAP",
+                job: "développeur ReactJs",
+                context: "intégration au sein de l’équipe Engineering du pôle Industrialisation, Cloud and Data, le consultant contribuera aux activités APIs et API Management",
+                mission: "Participer aux Comités d’Architecture pour garantir la bonne conformité des bonne pratique des APIs. Promouvoir les pratiques API First au sein du groupe. Rédiger / Maintenir un Guideline de développement d’API (création de modèle d’API, ...)",
+                timestamp: Date.now()
+            });
+
+            const task2 = new TaskModel({
+                location: "Paris 4",
+                duration: 12,
+                remote: 80,
+                start: "ASAP",
+                job: "développeur ReactJs",
+                context: "intégration au sein de l’équipe Engineering du pôle Industrialisation, Cloud and Data, le consultant contribuera aux activités APIs et API Management",
+                mission: "Participer aux Comités d’Architecture pour garantir la bonne conformité des bonne pratique des APIs. Promouvoir les pratiques API First au sein du groupe. Rédiger / Maintenir un Guideline de développement d’API (création de modèle d’API, ...)",
+                timestamp: Date.now()
+            });
+                
+            task1.save((err, task1) => { //manually set a task in the db
+                task2.save((err, task2) => {
+                    chai.request(server)
+                        .get('/tasks')
+                        .end((err, res) => {
+                            res.should.have.status(200); // Status code
+                            res.body.should.be.a('array'); 
+                            res.body.length.should.be.eql(2); 
+                            res.body[0].should.have.property('location').eql(task1.location);
+                            res.body[0].should.have.property('duration').eql(task1.duration);
+                            res.body[0].should.have.property('remote').eql(task1.remote);
+                            res.body[0].should.have.property('start').eql(task1.start);
+                            res.body[0].should.have.property('job').eql(task1.job);
+                            res.body[0].should.have.property('context').eql(task1.context);
+                            res.body[0].should.have.property('mission').eql(task1.mission);
+                            res.body[0].should.have.property('timestamp').eql(task1.timestamp);
+                            res.body[0].should.have.property('_id').eql(task1.id);
+                            
+                            res.body[1].should.have.property('location').eql(task2.location);
+                            res.body[1].should.have.property('duration').eql(task2.duration);
+                            res.body[1].should.have.property('remote').eql(task2.remote);
+                            res.body[1].should.have.property('start').eql(task2.start);
+                            res.body[1].should.have.property('job').eql(task2.job);
+                            res.body[1].should.have.property('context').eql(task2.context);
+                            res.body[1].should.have.property('mission').eql(task2.mission);
+                            res.body[1].should.have.property('timestamp').eql(task2.timestamp);
+                            res.body[1].should.have.property('_id').eql(task2.id);
+                        done();
+                    });
                 });
             });
         });
