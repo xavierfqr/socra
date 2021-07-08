@@ -2,7 +2,7 @@ const TaskModel = require("../models/task-model");
 const handleValidationError = require('../utils/handle-errors');
 var mongoose = require('mongoose');
 const orderTasksByKeywords = require("../services/search-service");
-const generatePDF = require('../services/pdf-generator')
+const generatePDF = require('../services/pdf-service')
 
 
 
@@ -83,12 +83,16 @@ const searchTasks = async (req, res) => {
     }
 }
 
+// Get PDF with task information
 const getPdfTask = async (req, res) => {
+    // if the request does not contain valid mongoose ID then status 400
     if (!mongoose.isValidObjectId(req.params.id)) {
         return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
     }
+    // Get the task matching the id with only interesting fields for the PDF
     const taskInfo = await TaskModel.findById(req.params.id, 'location duration price remote start job context mission').exec();
 
+    // if the id does not match any existing one then 404
     if (!taskInfo) {
         return res.status(404).send({error: "This task does not exists. Id: " + req.params.id + ' does not exist'});
     }
@@ -96,6 +100,7 @@ const getPdfTask = async (req, res) => {
     const filename = 'taskInfo';
     const pdfStream = await generatePDF(filename, taskInfo.toObject());
 
+    // return the PDF (automatically downloaded in browser)
     res.writeHead(200, {
         'Content-Length': Buffer.byteLength(pdfStream),
         'Content-Type': 'application/pdf',
