@@ -14,7 +14,9 @@ paths:
       description: Use to get all tasks
       responses:
         "200":
-          description: A successfull response
+          description: All tasks successfully returned
+        "400":
+          description: Failure to get all tasks
   "/task":
     post:
       summary: Create task
@@ -47,27 +49,63 @@ paths:
       parameters:
         - in: path
           name: id
-          schema:
-            example: 60e6f6a5a3ce1fc4b60415c8
       responses:
         "200":
-          description: A successfull response
+          description: Tasks successfully returned
         "500":
-          description: Failure in creating task
-    "/tasks/modify/{id}":
-      get:
-        summary: Use to get task by id
-        description: Use to request a task
-        parameters:
-          - in: path
-            name: id
+          description: Failure to download task
+  "/pdf/{id}":
+    get:
+      summary: Use to get task by id
+      description: Use to request a task
+      parameters:
+        - in: path
+          name: id
+      responses:
+        "200":
+          description: Pdf successfuly downloaded
+        "500":
+          description: Failure to download pdf task
+  "/tasks/search/keywords":
+    get:
+      summary: Search a keyword
+      description: Use to search a keyword in all task fields
+      parameters:
+        - in: query
+          name: search
+      responses:
+        "200":
+          description: Tasks search successfully returned
+        "500":
+          description: Fail to search tasks
+  "/tasks/modify/{id}":
+    patch:
+      summary: Modify task by id
+      description: Use to modify a task
+      parameters:
+        - in: path
+          name: id
+      requestBody:
+        content:
+          application/json:
             schema:
-              example: 60e6f6a5a3ce1fc4b60415c8
-        responses:
-          "200":
-            description: A successfull response
-          "500":
-            description: Failure in creating task
+              "$ref": "#/components/schemas/Task"
+            examples:
+              task:
+                value:
+                  job: "developpeur Java"
+                  location: Issy-les-Moulineaux
+                  duration: 12
+                  price: 100
+                  remote: 50
+                  start: 12
+                  context: intégration au sein de l’équipe Engineering du pôle Industrialisation
+                  mission: Participer aux Comités d’Architecture pour garantir la bonne conformité des bonne pratique des APIs.
+      responses:
+        "200":
+          description: Task successfully modified
+        "500":
+          description: Failure to modify task
 components:
   schemas:
     Task:
