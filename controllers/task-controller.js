@@ -1,9 +1,8 @@
 const TaskModel = require("../models/task-model");
-const handleValidationError = require('../utils/handle-errors');
+const errorHandler = require('../utils/handle-errors');
 var mongoose = require('mongoose');
 const orderTasksByKeywords = require("../services/search-service");
 const generatePDF = require('../services/pdf-service')
-
 
 
 const addTask = async (req, res) => {
@@ -23,23 +22,23 @@ const addTask = async (req, res) => {
         res.send(task);
     } catch (error) {
         if (error.name === 'ValidationError') {
-            return error = handleValidationError(error, res);
+            return error = errorHandler.handleValidationError(error, res);
         } else {
-            return res.status(500).send({error: "An unknown error has occured."})
+            return error = errorHandler.handleUnknownError(res);
         }
     }
 }
 
 const getTaskById = async (req, res) => {
     if (!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+        return error = errorHandler.handleMongooseIdError(res, req.params.id);
     }
 
     const task = await TaskModel.findById(req.params.id);
     if (task)
         return res.send(task);
     else
-        return res.status(404).send({error: "Ressource not found. Id: " + req.params.id + ' does not exist'});
+        return error = errorHandler.handleInvalidIdError(res, req.params.id);
 }
 
 const getTasks = async (req, res) => {
@@ -50,7 +49,7 @@ const getTasks = async (req, res) => {
 const modifyTaskById = async (req, res) => {
 
     if (!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+        return error = errorHandler.handleMongooseIdError(res, req.params.id);
     }
 
     const id = req.params.id;
@@ -64,15 +63,15 @@ const modifyTaskById = async (req, res) => {
         if (post) {
             return res.send(post);
         } else {
-            return res.status(404).send({error: "Ressource not found. Id: " + req.params.id + ' does not exist'});
+            return error = errorHandler.handleInvalidIdError(res, req.params.id);
         }
     } catch (error) {
         if (error.name === 'ValidationError') {
-            return error = handleValidationError(error, res);
+            return error = errorHandler.handleValidationError(error, res);
         } else if (error.name === 'CastError') {
             return res.status(400).send({error: "Cast error, please check the type of your body request"});
         } else {
-            return res.status(500).send({error: "An unknown error has occured."})
+            return error = errorHandler.handleUnknownError(res);
         }
     }
 }
@@ -94,14 +93,14 @@ const searchTasks = async (req, res) => {
 const getPdfTask = async (req, res) => {
     // if the request does not contain valid mongoose ID then status 400
     if (!mongoose.isValidObjectId(req.params.id)) {
-        return res.status(400).send({error: "The provided ID is not a valid mongoose ID"});
+        return error = errorHandler.handleMongooseIdError(res, req.params.id);
     }
     // Get the task matching the id with only interesting fields for the PDF
     const taskInfo = await TaskModel.findById(req.params.id, 'location duration price remote start job context mission').exec();
 
     // if the id does not match any existing one then 404
     if (!taskInfo) {
-        return res.status(404).send({error: "This task does not exists. Id: " + req.params.id + ' does not exist'});
+        return error = errorHandler.handleInvalidIdError(res, req.params.id);
     }
 
     const filename = 'taskInfo';

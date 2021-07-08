@@ -1,7 +1,7 @@
 const handleValidationError = (err, res) => {
     let errors = Object.values(err.errors).map(el => el.message);
     let fields = Object.values(err.errors).map(el => el.path);
-    let code = 400;
+    const code = 400;
     if (errors.length > 1) {
         const formattedErrors = errors.join('.  ');
         res.status(code).send({error: "Bad request, some fields are not well formatted. Please read the documentation.", fields: fields, messages: formattedErrors });
@@ -10,4 +10,24 @@ const handleValidationError = (err, res) => {
     }
 }
 
-module.exports = handleValidationError
+const handleUnknownError = (res) => {
+    const code = 500;
+    res.status(code).send({error: "An unknown error has occured. Please refer to the documentation or check the server availibility."});
+}
+
+const handleMongooseIdError = (res, id) => {
+    const code = 400;
+    res.status(code).send({error: "The provided ID: " + id + " is not a valid mongoose ID"});
+}
+
+const handleInvalidIdError = (res, id) => {
+    const code = 404;
+    res.status(code).send({error: "Ressource not found, please verify that the ID: " + id + " exists"});
+}
+
+module.exports = {
+    handleValidationError,
+    handleUnknownError,
+    handleMongooseIdError,
+    handleInvalidIdError
+}
