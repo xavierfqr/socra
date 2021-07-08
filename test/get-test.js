@@ -94,8 +94,6 @@ describe('GET Endpoint Tests', () => {
                             res.should.have.status(200); // Status code
                             res.body.should.be.a('array'); 
                             res.body.length.should.be.eql(2); 
-                            console.log(res.body);
-                            console.log(task1.toObject())
                             res.body[0].should.have.property('location').eql(task1.location);
                             res.body[0].should.have.property('duration').eql(task1.duration);
                             res.body[0].should.have.property('remote').eql(task1.remote);
