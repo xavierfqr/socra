@@ -1,21 +1,21 @@
 // Require the dependencies
-let mongoose = require("mongoose");
-let TaskModel = require("../models/task-model");
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../app.js');
-let should = chai.should();
+const mongoose = require("mongoose");
+const TaskModel = require("../models/task-model");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app.js');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
 
-describe('Post Endpoint Tests', () => {
+describe('POST Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
         TaskModel.deleteMany({}, (err) => {
             done();
         });
     });
-    describe('Post one task', () => {
+    describe('POST one task', () => {
         it('Should POST a task', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",
@@ -46,7 +46,7 @@ describe('Post Endpoint Tests', () => {
     });
 
     // Test: Post one task with fail (error 400) because of an invalid task field
-    describe('Post one task fail', () => {
+    describe('POST one task fail', () => {
         it('Should not POST a task with one wrong field', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",
@@ -74,7 +74,7 @@ describe('Post Endpoint Tests', () => {
     });
 
     // Test: Post one task with fail (error 400) because of several invalid task fields
-    describe('Post one task fail', () => {
+    describe('POST one task fail', () => {
         it('Should not POST a task with multiple wrong fields', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",

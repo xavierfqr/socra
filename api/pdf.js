@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getPdfTask} = require('../controllers/task-controller');
+const {unused, getPdfTask} = require('../controllers/task-controller');
 
 router.get('/pdf/:id', getPdfTask);
 

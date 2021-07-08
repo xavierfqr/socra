@@ -1,10 +1,10 @@
 // Require the dependencies
-let mongoose = require("mongoose");
-let TaskModel = require("../models/task-model");
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../app.js');
-let should = chai.should();
+const mongoose = require("mongoose");
+const TaskModel = require("../models/task-model");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app.js');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -16,7 +16,7 @@ describe('GET Endpoint Tests', () => {
     });
 
     // Test: GET all the tasks
-    describe('/GET Empty', () => {
+    describe('GET Empty', () => {
         it('Should GET no tasks', (done) => {
             chai.request(server)
                 .get('/tasks')
@@ -30,7 +30,7 @@ describe('GET Endpoint Tests', () => {
     });
 
     // Test: GET one task
-    describe('/GET one task', () => {
+    describe('GET one task', () => {
         it('Should GET one task', (done) => {
             const task = new TaskModel({
                 location: "Issy-les-Moulineaux",
@@ -64,7 +64,7 @@ describe('GET Endpoint Tests', () => {
         });
     });
 
-    describe('/GET task by id', () => {
+    describe('GET task by id', () => {
         it('Should GET one task by Id', done => {
             let task = new TaskModel({
                 location: "Issy-les-Moulineaux",

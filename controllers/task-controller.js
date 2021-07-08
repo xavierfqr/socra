@@ -66,7 +66,6 @@ const modifyTaskById = async (req, res) => {
             return error = errorHandler.handleInvalidIdError(res, req.params.id);
         }
     } catch (error) {
-        console.log(error.name);
         if (error.name === 'ValidationError') {
             return error = errorHandler.handleValidationError(error, res);
         } else if (error.name === 'CastError') {

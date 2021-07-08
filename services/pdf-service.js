@@ -54,4 +54,4 @@ function formatDescription(key, value) {
     }
 }
 
-module.exports = generatePDF
+module.exports = { formatDescription, generatePDF };
