@@ -16,7 +16,7 @@ describe('GET Endpoint Tests', () => {
     });
 
     // Test: GET all the tasks
-    describe('/GET Empty', () => {
+    describe('GET Empty', () => {
         it('Should GET no tasks', (done) => {
             chai.request(server)
                 .get('/tasks')
@@ -30,7 +30,7 @@ describe('GET Endpoint Tests', () => {
     });
 
     // Test: GET one task
-    describe('/GET one task', () => {
+    describe('GET one task', () => {
         it('Should GET one task', (done) => {
             const task = new TaskModel({
                 location: "Issy-les-Moulineaux",
@@ -64,7 +64,7 @@ describe('GET Endpoint Tests', () => {
         });
     });
 
-    describe('/GET task by id', () => {
+    describe('GET task by id', () => {
         it('Should GET one task by Id', done => {
             let task = new TaskModel({
                 location: "Issy-les-Moulineaux",

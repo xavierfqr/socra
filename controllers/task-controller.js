@@ -67,7 +67,6 @@ const modifyTaskById = async (req, res) => {
             return res.status(404).send({error: "Ressource not found. Id: " + req.params.id + ' does not exist'});
         }
     } catch (error) {
-        console.log(error.name);
         if (error.name === 'ValidationError') {
             return error = handleValidationError(error, res);
         } else if (error.name === 'CastError') {
