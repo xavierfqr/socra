@@ -1,0 +1,107 @@
+---
+openapi: 3.0.0
+info:
+  title: Task API
+  description: Task API Information
+  contact:
+    name: Blokoding
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  "/tasks":
+    get:
+      description: Use to get all tasks
+      responses:
+        "200":
+          description: A successfull response
+  "/task":
+    post:
+      summary: Create task
+      description: Use to request all tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Task"
+            examples:
+              task:
+                value:
+                  job: "developpeur Java"
+                  location: Issy-les-Moulineaux
+                  duration: 12
+                  price: 100
+                  remote: 50
+                  start: 12
+                  context: intégration au sein de l’équipe Engineering du pôle Industrialisation
+                  mission: Participer aux Comités d’Architecture pour garantir la bonne conformité des bonne pratique des APIs.
+      responses:
+        "200":
+          description: A successfull response
+        "500":
+          description: Failure in creating task
+  "/tasks/{id}":
+    get:
+      summary: Use to get task by id
+      description: Use to request a task
+      parameters:
+        - in: path
+          name: id
+          schema:
+            example: 60e6f6a5a3ce1fc4b60415c8
+      responses:
+        "200":
+          description: A successfull response
+        "500":
+          description: Failure in creating task
+    "/tasks/modify/{id}":
+      get:
+        summary: Use to get task by id
+        description: Use to request a task
+        parameters:
+          - in: path
+            name: id
+            schema:
+              example: 60e6f6a5a3ce1fc4b60415c8
+        responses:
+          "200":
+            description: A successfull response
+          "500":
+            description: Failure in creating task
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        location:
+          type: string
+          description: Location of the mission
+          example: Issy-les-Moulineaux
+        duration:
+          type: number
+          description: Duration of the mission
+          example: 12
+        price:
+          type: number
+          description: Price
+          example: 100
+        remote:
+          type: number
+          description: Percentage of work done remotely
+          example: 50
+        start:
+          type: string
+          description: Day the mission starts
+          example: 12
+        job:
+          type: string
+          description: Name of the job
+          example: développeur ReactJs
+        context:
+          type: string
+          description: Context
+          example: intégration au sein de l’équipe Engineering du pôle Industrialisation, Cloud and Data, le consultant contribuera aux activités APIs et API Management.
+        mission:
+          type: string
+          description: Mission
+          example: Participer aux Comités d’Architecture pour garantir la bonne conformité des bonne pratique des APIs. Promouvoir les pratiques API First au sein du groupe. Rédiger Maintenir un Guideline de développement d’API (création de modèle d’API, ...)
