@@ -11,6 +11,7 @@ servers:
 paths:
   "/tasks":
     get:
+      summary: Get all tasks
       description: Use to get all tasks
       responses:
         "200":
@@ -44,7 +45,7 @@ paths:
           description: Failure in creating task
   "/tasks/{id}":
     get:
-      summary: Use to get task by id
+      summary: Get task by id
       description: Use to request a task
       parameters:
         - in: path
@@ -56,7 +57,7 @@ paths:
           description: Failure to download task
   "/pdf/{id}":
     get:
-      summary: Use to get task by id
+      summary: Get pdf task by id
       description: Use to request a task
       parameters:
         - in: path
@@ -68,7 +69,7 @@ paths:
           description: Failure to download pdf task
   "/tasks/search/keywords":
     get:
-      summary: Search a keyword
+      summary: Search task by keyword
       description: Use to search a keyword in all task fields
       parameters:
         - in: query
