@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TaskModel = require("../models/task-model");
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../app.js');
+const server = require('../test.js');
 const should = chai.should();
 
 chai.use(chaiHttp);
@@ -94,8 +94,6 @@ describe('GET Endpoint Tests', () => {
                             res.should.have.status(200); // Status code
                             res.body.should.be.a('array'); 
                             res.body.length.should.be.eql(2); 
-                            console.log(res.body);
-                            console.log(task1.toObject())
                             res.body[0].should.have.property('location').eql(task1.location);
                             res.body[0].should.have.property('duration').eql(task1.duration);
                             res.body[0].should.have.property('remote').eql(task1.remote);
@@ -137,11 +135,10 @@ describe('GET Endpoint Tests', () => {
             task.save((err, task) => {
                     chai.request(server)
                 .get('/tasks/' + task.id)
-                .send(task)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.should.have.property('location').eql(task.location);
+                        res.body.should.have.property('location').eql(task.location);
                     res.body.should.have.property('duration').eql(task.duration);
                     res.body.should.have.property('remote').eql(task.remote);
                     res.body.should.have.property('start').eql(task.start);

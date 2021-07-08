@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 let TaskModel = require("../models/task-model");
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../app.js');
+let server = require('../test.js');
 let should = chai.should();
 const fs = require('fs');
 

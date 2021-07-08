@@ -17,7 +17,12 @@ npm run dbinit # to populate database
 npm start
 ```
 
-Then, you can query the api by typing of localhost:3000
+Then, you can query the api on localhost:3000
+
+## Swagger documentation
+
+Once the database is initialized and the server launched, you can check the api documentation on :
+localhost:3000/api-docs
 
 ## Run tests
 
