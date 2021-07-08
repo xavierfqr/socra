@@ -30,16 +30,16 @@ describe('GET PDF Endpoint Tests', () => {
                 timestamp: Date.now()
             })
             task.save((err, task) => {
-                    chai.request(server)
-                .get('/pdf/' + task.id)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.headers['content-type'].should.be.eq('application/pdf');
-                    fs.unlinkSync('./taskInfo.pdf');
-                    done();
-                })
-            })    
-        })
+                chai.request(server)
+                    .get('/pdf/' + task.id)
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.headers['content-type'].should.be.eq('application/pdf');
+                        fs.unlinkSync('./taskInfo.pdf');
+                        done();
+                    });
+            });
+        });
 
         it('Should send error 400: Mongoose invalid ID', done => {
             let task = new TaskModel({
@@ -62,9 +62,9 @@ describe('GET PDF Endpoint Tests', () => {
                     res.body.error.should.be.eql("The provided ID: " + id + " is not a valid mongoose ID") //check error message from response
                     res.body.should.have.property('error');
                     done();
-                })
-            })    
-        })
+                });
+            });    
+        });
 
         it('Should send error 404: Ressource not found because id does not exist', done => {
             let task = new TaskModel({
@@ -86,8 +86,8 @@ describe('GET PDF Endpoint Tests', () => {
                     res.body.error.should.be.eql("Ressource not found, please verify that the ID: " + task.id.slice(0, -3) + '123' + " exists") //check error message from response
                     res.body.should.have.property('error');
                     done();
-                })
-            })    
-        })
+                });
+            });    
+        });
     });
 });

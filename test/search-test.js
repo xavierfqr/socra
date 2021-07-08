@@ -42,7 +42,7 @@ describe('SEARCH Endpoint Tests', () => {
                             .get('/tasks/search/keywords?search=foo,bar')
                             .end((err, res) => {
                                 res.should.have.status(200); // Status code
-                                res.body.should.be.a('array'); // []
+                                res.body.should.be.a('array');
                                 res.body.length.should.be.eql(3);
                                 res.body[0].should.have.property('location').eql(task3.location);
                                 res.body[1].should.have.property('location').eql(task1.location);
@@ -75,7 +75,7 @@ describe('SEARCH Endpoint Tests', () => {
                         .get('/tasks/search/keywords?search=foo,bar,baz')
                         .end((err, res) => {
                             res.should.have.status(200); // Status code
-                            res.body.should.be.a('array'); // []
+                            res.body.should.be.a('array');
                             res.body.length.should.be.eql(2);
                             res.body[0].should.have.property('location').eql(task2.location);
                             res.body[1].should.have.property('location').eql(task1.location);
