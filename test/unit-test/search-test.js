@@ -1,6 +1,3 @@
-// During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
 // Require the dependencies
 const mongoose = require("mongoose");
 const TaskModel = require("../../models/task-model");
@@ -10,12 +7,6 @@ const should = chai.should();
 const orderTasksByKeywords = require("../../services/search-service");
 
 describe('Search service Unit Tests', () => {
-    beforeEach((done) => { // Before each test we empty the database
-        TaskModel.deleteMany({}, (err) => {
-            done();
-        });
-    });
-
     describe('Order by occurences', () => {
         it('Should order the 3 tasks', (done) => {
             const taskList = [
