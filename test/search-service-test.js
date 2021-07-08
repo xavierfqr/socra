@@ -39,7 +39,7 @@ describe('Search service Unit Tests', () => {
         });
     });
 
-    describe('SEARCH by word found', () => {
+    describe('Order by word found', () => {
         it('Should order the 2 tasks', (done) => {
             const taskList = [
                 new TaskModel({

@@ -5,6 +5,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../app.js');
 let should = chai.should();
+const fs = require('fs');
 
 chai.use(chaiHttp);
 
@@ -34,6 +35,7 @@ describe('GET PDF Endpoint Tests', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.headers['content-type'].should.be.eq('application/pdf');
+                    fs.unlinkSync('./taskInfo.pdf');
                     done();
                 })
             })    
@@ -87,7 +89,5 @@ describe('GET PDF Endpoint Tests', () => {
                 })
             })    
         })
-
     });
-
 });
