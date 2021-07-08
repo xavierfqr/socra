@@ -1,9 +1,9 @@
 // Require the dependencies
 const mongoose = require("mongoose");
-const TaskModel = require("../../models/task-model");
+const TaskModel = require("../models/task-model");
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../../app.js');
+const server = require('../app.js');
 const should = chai.should();
 
 chai.use(chaiHttp);
