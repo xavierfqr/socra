@@ -7,6 +7,7 @@ const PDFservice = require('../services/pdf-service')
 
 const addTask = async (req, res) => {
     try {
+        // Create a new task with body
         const task = new TaskModel({
             location: req.body.location,
             duration: req.body.duration,
@@ -18,7 +19,11 @@ const addTask = async (req, res) => {
             mission: req.body.mission,
             timestamp: Date.now(),
         });
+
+        // Save
         await task.save();
+
+        // Send saved object as response
         res.send(task);
     } catch (error) {
         if (error.name === 'ValidationError') {
@@ -30,30 +35,34 @@ const addTask = async (req, res) => {
 }
 
 const getTaskById = async (req, res) => {
+    // Check id
     if (!mongoose.isValidObjectId(req.params.id)) {
         return error = errorHandler.handleMongooseIdError(res, req.params.id);
     }
 
+    // find
     const task = await TaskModel.findById(req.params.id);
     if (task)
         return res.send(task);
-    else
+    else // if not found
         return error = errorHandler.handleInvalidIdError(res, req.params.id);
 }
 
 const getTasks = async (req, res) => {
+    // Get all sort by timestamp
     const tasks = await TaskModel.find().sort({ timestamp: "desc" });
 	return res.send(tasks);
 }
 
 const modifyTaskById = async (req, res) => {
-
+    // check id
     if (!mongoose.isValidObjectId(req.params.id)) {
         return error = errorHandler.handleMongooseIdError(res, req.params.id);
     }
 
     const id = req.params.id;
     var postData = req.body;
+    
     // Update timestamp
     postData.timestamp = Date.now();
 
