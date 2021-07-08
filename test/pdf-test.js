@@ -79,11 +79,11 @@ describe('GET PDF Endpoint Tests', () => {
             })
             task.save((err, task) => {
                     chai.request(server)
-                .get('/pdf/' + task.id.slice(0, -1) + '1')
+                .get('/pdf/' + task.id.slice(0, -3) + '123')
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');
-                    res.body.error.should.be.eql("Ressource not found, please verify that the ID: " + task.id.slice(0, -1) + '1' + " exists") //check error message from response
+                    res.body.error.should.be.eql("Ressource not found, please verify that the ID: " + task.id.slice(0, -3) + '123' + " exists") //check error message from response
                     res.body.should.have.property('error');
                     done();
                 })
