@@ -29,13 +29,13 @@ npm run test
 
 ```
 .
-|- api          # Api endpoints
-|- config       # Confiuration data
+|- .circleci    # Circle CI config
+|- api          # Api routes/endpoints
 |- const        # Constants
 |- models       # Mongoose models
-|- node_modules # npm modules
-|- script       # init scripts
+|- script       # initialization scripts
 |- services     # Services layer
 |- controllers  # Controllers layer
-+- test         # test
+|- utils        # utilities
++- test         # tests
 ```
