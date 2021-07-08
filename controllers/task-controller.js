@@ -2,7 +2,7 @@ const TaskModel = require("../models/task-model");
 const errorHandler = require('../utils/handle-errors');
 var mongoose = require('mongoose');
 const orderTasksByKeywords = require("../services/search-service");
-const generatePDF = require('../services/pdf-service')
+const PDFservice = require('../services/pdf-service')
 
 
 const addTask = async (req, res) => {
@@ -104,7 +104,7 @@ const getPdfTask = async (req, res) => {
     }
 
     const filename = 'taskInfo';
-    const pdfStream = await generatePDF(filename, taskInfo.toObject());
+    const pdfStream = await PDFservice.generatePDF(filename, taskInfo.toObject());
 
     // return the PDF (automatically downloaded in browser)
     res.writeHead(200, {

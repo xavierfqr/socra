@@ -1,10 +1,10 @@
 // Require the dependencies
 const mongoose = require("mongoose");
-const TaskModel = require("../../models/task-model");
-const server = require('../../app.js');
+const TaskModel = require("../models/task-model");
+const server = require('../app.js');
 const chai = require('chai');
 const should = chai.should();
-const orderTasksByKeywords = require("../../services/search-service");
+const orderTasksByKeywords = require("../services/search-service");
 
 describe('Search service Unit Tests', () => {
     describe('Order by occurences', () => {
@@ -39,7 +39,7 @@ describe('Search service Unit Tests', () => {
         });
     });
 
-    describe('SEARCH by word found', () => {
+    describe('Order by word found', () => {
         it('Should order the 2 tasks', (done) => {
             const taskList = [
                 new TaskModel({

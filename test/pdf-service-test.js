@@ -1,10 +1,10 @@
 // Require the dependencies
 const mongoose = require("mongoose");
-const TaskModel = require("../../models/task-model");
-const server = require('../../app.js');
+const TaskModel = require("../models/task-model");
+const server = require('../app.js');
 const chai = require('chai');
 const should = chai.should();
-const {formatDescription, unused} = require("../../services/pdf-service");
+const {formatDescription, unused} = require("../services/pdf-service");
 
 describe('PDF Unit Tests', () => {
     describe('formatDescription function tests', () => {

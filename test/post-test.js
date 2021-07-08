@@ -45,8 +45,8 @@ describe('POST Endpoint Tests', () => {
         });
     });
 
-    // Test: Post one task with fail (error 400) because of an invalid task field
     describe('POST one task fail', () => {
+        // Test: Post one task with fail (error 400) because of an invalid task field
         it('Should not POST a task with one wrong field', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",
@@ -71,10 +71,8 @@ describe('POST Endpoint Tests', () => {
                 done();
             });
         });
-    });
 
-    // Test: Post one task with fail (error 400) because of several invalid task fields
-    describe('POST one task fail', () => {
+        // Test: Post one task with fail (error 400) because of several invalid task fields
         it('Should not POST a task with multiple wrong fields', (done) => {
             let task = {
                 location: "Issy-les-Moulineaux",

@@ -5,17 +5,18 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../app.js');
 let should = chai.should();
+const fs = require('fs');
 
 chai.use(chaiHttp);
 
-describe('GET Endpoint Tests', () => {
+describe('GET PDF Endpoint Tests', () => {
     beforeEach((done) => { // Before each test we empty the database
         TaskModel.deleteMany({}, (err) => {
             done();
         });
     });
 
-    describe('/GET pdf by id', () => {
+    describe('GET pdf by id', () => {
         
         it('Should GET the pdf by id', done => {
             let task = new TaskModel({
@@ -34,6 +35,7 @@ describe('GET Endpoint Tests', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.headers['content-type'].should.be.eq('application/pdf');
+                    fs.unlinkSync('./taskInfo.pdf');
                     done();
                 })
             })    
@@ -87,7 +89,5 @@ describe('GET Endpoint Tests', () => {
                 })
             })    
         })
-
     });
-
 });
