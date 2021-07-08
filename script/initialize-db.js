@@ -1,13 +1,9 @@
-// Set env variable for dev purpose
-process.env.NODE_ENV = 'dev';
-
 // modules
 const mongoose = require('mongoose');
 const TaskModel = require("../models/task-model");
 var data = require("../const/db-data");
-let config = require('config'); // We load the db location from the JSON files
 
-mongoose.connect(config.DBHost, { useUnifiedTopology: true,  useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/socra", { useUnifiedTopology: true,  useNewUrlParser: true });
 var db = mongoose.connection;
  
 db.on('error', console.error.bind(console, 'connection error to socra DB'));

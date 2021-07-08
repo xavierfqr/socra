@@ -4,5 +4,4 @@ const {getPdfTask} = require('../controllers/task-controller');
 
 router.get('/pdf/:id', getPdfTask);
 
-
 module.exports = router;

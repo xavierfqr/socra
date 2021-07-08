@@ -1,6 +1,4 @@
-// Set env variable for dev purpose
-process.env.NODE_ENV = 'dev';
-
+// Get dependencies
 const express = require('express');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
@@ -9,8 +7,16 @@ const mongoose = require('mongoose');
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-let config = require('config'); // We load the db location from the JSON files
-mongoose.connect(config.DBHost, { useUnifiedTopology: true,  useNewUrlParser: true });
+
+var connectString = "mongodb://localhost:27017/";
+
+// check if testing, and accord database
+if (process.argv[0] === "node")
+    connectString += "socra";
+else
+    connectString += "socra-test";
+
+mongoose.connect(connectString, { useUnifiedTopology: true,  useNewUrlParser: true });
 
 // To parse req.body
 app.use(express.json());

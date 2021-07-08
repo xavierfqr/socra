@@ -31,9 +31,9 @@ async function generatePDF(filename, taskInfo){
         // create stream for returning it.
         doc.pipe(fs.createWriteStream(`${__dirname}/../` + filename + '.pdf'));
         doc.end();
-  
+
         const pdfStream = await getStream.buffer(doc);
-  
+
         return pdfStream;
     } catch (error) {
         return null;
