@@ -49,3 +49,13 @@ To show the CI, click on the green/red mark next to commit names.
 |- utils        # utilities
 +- test         # tests
 ```
+
+## Authors
+
+david.ghiassi
+
+remy.dao
+
+xavier.facqueur
+
+alexandre.vermeulen
