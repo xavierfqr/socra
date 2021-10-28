@@ -5,6 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocs = YAML.load('./swagger.yml');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -20,6 +21,7 @@ else
 mongoose.connect(connectString, { useUnifiedTopology: true,  useNewUrlParser: true });
 
 // To parse req.body
+app.use(cors());
 app.use(express.json());
 app.use(require('./api/add'));
 app.use(require('./api/get'));
