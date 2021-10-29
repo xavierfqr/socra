@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const TaskModel = require("../models/task-model");
 var data = require("../const/db-data");
 
-mongoose.connect("mongodb://localhost:27017/socra", { useUnifiedTopology: true,  useNewUrlParser: true });
+mongoose.connect("/socra", { useUnifiedTopology: true,  useNewUrlParser: true });
 var db = mongoose.connection;
  
 db.on('error', console.error.bind(console, 'connection error to socra DB'));

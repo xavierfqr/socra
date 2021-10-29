@@ -2,6 +2,7 @@
   "name": "socra",
   "version": "1.0.0",
   "description": "",
+  "proxy": "mongodb://10.0.1.52:27017",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
