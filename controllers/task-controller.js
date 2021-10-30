@@ -50,7 +50,9 @@ const getTaskById = async (req, res) => {
 
 const getTasks = async (req, res) => {
     // Get all sort by timestamp
+    console.log("/task", req)
     const tasks = await TaskModel.find().sort({ timestamp: "desc" });
+    console.log("tasks from db", tasks)
 	return res.send(tasks);
 }
 
