@@ -10,7 +10,7 @@ const cors = require('cors');
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
-var connectString = "mongodb://localhost:27017/socra";
+var connectString = "mongodb://10.0.1.52/socra";
 
 // check if testing, and accord database
 /*if (process.argv[0] === "node")
