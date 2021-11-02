@@ -20,6 +20,10 @@ else
 
 mongoose.connect(connectString, { useUnifiedTopology: true,  useNewUrlParser: true });
 
+var db = mongoose.connection;
+ 
+db.on('error', console.error.bind(console, 'connection error to socra DB'));
+
 // To parse req.body
 app.use(cors());
 app.use(express.json());
